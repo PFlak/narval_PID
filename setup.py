@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 from glob import glob
 import os
 
-package_name = "narval_PID"
+package_name = "narval_pid"
 
 setup(
     name=package_name,
@@ -13,7 +13,8 @@ setup(
         ("share/" + package_name, ["package.xml"]),
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py*'))),
         (os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.yaml*'))),
-        (os.path.join('share', package_name, 'nodes'), glob(os.path.join('nodes', '*.py*'))),
+        (os.path.join('share', package_name, 'nodes'), glob(os.path.join('nodes', '*node.py*'))),
+
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -23,6 +24,8 @@ setup(
     license="Apache-2.0",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": [],
+        "console_scripts": [
+            "depth_pid = nodes.depthPID_node:main"
+        ],
     },
 )
